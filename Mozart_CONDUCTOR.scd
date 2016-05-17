@@ -1,55 +1,50 @@
-// MOZART DICE GAME "CONDUCTOR"
+// CONDUCTOR
 
+// Load IPs
+"Mozart_IP_Addresses.scd".loadRelative;
 
+// Load some functions
+"Mozart_Conductor_Functions.scd".loadRelative;
 
-// function to start tempoclock on everyone
-~sendTempoStart = { arg bpm;
-	~ips.do({ arg item;
-		item.sendMsg("/tempo/start", bpm)
-	});
-};
+// Start metronome
+~sendTempoStart.value(120);
 
-// function to change tempo on everyone
-~sendTempoChange = { arg bpm;
-	~ips.do({ arg item;
-		item.sendMsg("/tempo/change", bpm)
-	});
-};
+// Change tempo anytime
+~sendTempoChange.value(141);
 
-// function to send start trigger to everyone
-~sendStartPlaying = { ~ips.do({ arg item; item.sendMsg("/start", "go")}) };
+// Start playing
+~sendStartPlaying.value;
 
-// function to send "dice" winner candidate to everyone
-~sendDiceWinner = { arg diceWinner; ~ips.do({ arg item; item.sendMsg("/diceWinner", diceWinner)}) };
-
-// number of candidates
-~numberOfCandidates = 13;
-
-// create an empty tally array
-~tally = Array.fill(~numberOfCandidates, 0);
-
-
-// get votes from orchestra
-OSCdef(
-	key: \getVotes,
-	func: { arg msg;
-		var candidate = msg[1];
-		var currentCount = ~tally[candidate];
-		candidate.postln;
-		currentCount.postln;
-		~tally[candidate] = currentCount + 1;
-	},
-	path: '/vote';
+// Print tally updates
+(
+{
+	inf.do{
+		~tally.postln;
+		0.3.wait;
+	}
+}.fork;
 )
 
+// Still MANUAL...
+// findWinner, instantly send it to all computers, reset list
+~findWinner.value;
 
-// find Winner Candidate ("dice result")
-// and send it out right away
-~findWinner = {
-	var diceWinner = ~tally.maxIndex; // find winner
-	~tally = Array.fill(~numberOfCandidates, 0); // clear array
-	~sendDiceWinner.value(diceWinner); // sent it out
-};
 
+
+
+
+
+
+
+// Manually send winners (1-12)
+~sendDiceWinner.value(10);
+
+~tally;
+
+
+
+// idea for another version:
+// vote only gets counted when we reach a minimum number of voters
+// make players be stuck on SAME measure A, B, C... until that happens.
 
 
