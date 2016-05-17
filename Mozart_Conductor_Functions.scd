@@ -21,6 +21,9 @@
 // function to send "dice" winner candidate to everyone
 ~sendDiceWinner = { arg diceWinner; ~ips.do({ arg item; item.sendMsg("/diceWinner", diceWinner)}) };
 
+// function to tell players to either ADVANCE (1) or NOT ADVANCE (0) letter measures locally.
+~advanceLetterMeasureFlag = { arg flag = 0; ~ips.do({ arg item; item.sendMsg("/letterMeasureFlag", flag)}) };
+
 // number of candidates
 ~numberOfCandidates = 13;
 

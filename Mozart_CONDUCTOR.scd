@@ -12,6 +12,9 @@
 // Change tempo anytime
 ~sendTempoChange.value(141);
 
+// Who advances letter measures? 0 = conductor does; 1 = local machines do.
+~advanceLetterMeasureFlag.value(0);
+
 // Start playing
 ~sendStartPlaying.value;
 
@@ -37,7 +40,7 @@
 
 
 // Manually send winners (1-12)
-~sendDiceWinner.value(10);
+~sendDiceWinner.value(rrand(1, 12));
 
 ~tally;
 
