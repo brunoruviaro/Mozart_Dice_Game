@@ -1,7 +1,7 @@
-// Audrey Gomes, May 5, 2016
-// Page 3, measures 1-48
+// Mozart's Musical Dice Game
+// Transcribed from musical score to SuperCollider file by Audrey Gomes, David Kerr, Alden Yanos, Evan Adams, and Bruno Ruviaro.
+// May 2016.
 
-(
 ~score = [
 	[], // dummy measure (#0)
 
@@ -2687,8 +2687,9 @@
 	];
 
 ]; // end of score
-)
 
+"Score loaded successfully".postln;
+"".postln;
 
 // ===============================
 // TEST
