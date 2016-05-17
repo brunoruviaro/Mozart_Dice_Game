@@ -5,12 +5,12 @@
 // 16*11 = 176 measures
 
 ~firstPart = [
-	// dice "0" -- not in the original
+	// invalid entry
 	["abstention"],
-	// dice 1 -- not in the original
-	["protest vote"],
+	// crazy entry
+	[0, 0, 0, 0, 0, 0, 0, 0],
 	// dice = 2
-	[96, 22, 141, 105, 122, 11, 30],
+	[96, 22, 141, 41, 105, 122, 11, 30],
 	// dice = 3,
 	[32, 6, 128, 63, 146, 46, 134, 81],
 	// dice = 4,

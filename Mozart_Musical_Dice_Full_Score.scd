@@ -3,7 +3,21 @@
 // May 2016.
 
 ~score = [
-	[], // dummy measure (#0)
+
+	// ===========
+	// MEASURE 0 (protest vote)
+	// ===========
+	[
+		[ // right hand
+			{ rrand(72, 83) }.dup(9), // random notes
+			{ rrand(0.1, 0.2) }.dup(9).round(0.01).normalizeSum * 3/8 // durations (eighth note = 1/8)
+		],
+
+		[ // left hand
+			[rrand(36, 48)],
+			[3/8]
+		]
+	],
 
 	// ===========
 	// MEASURE 1

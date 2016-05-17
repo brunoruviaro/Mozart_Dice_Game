@@ -26,6 +26,7 @@ OSCdef(
 	path: '/tempo/change'
 );
 
+~winner = 3; // just an initialization value
 
 // start continuous playback
 OSCdef(
@@ -86,6 +87,29 @@ q = Pbind(
 };
 
 
+
+// =====================
+// SEND VOTE TO TALLY
+// =====================
+// Local player sends vote to remote computer
+
+~sendVote = { arg vote; ~destination.sendMsg("/vote", vote) };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// leftovers
+
 // ~playMeasure.value(92);
 
 // test only
@@ -105,12 +129,3 @@ t.sched(0, {
 
 })
 )*/
-
-
-// =====================
-// SEND VOTE TO TALLY
-// =====================
-// Local player sends vote to remote computer
-
-~sendVote = { arg vote; ~destination.sendMsg("/vote", vote) };
-
