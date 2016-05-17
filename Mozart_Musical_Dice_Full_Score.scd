@@ -5,7 +5,7 @@
 ~score = [
 
 	// ===========
-	// MEASURE 0 (protest vote)
+	// MEASURE 0 [protest vote!]
 	// ===========
 	[
 		[ // right hand
@@ -543,13 +543,13 @@
 	// ===========
 	[
 		[ // right hand
-			[ 60 ], // midinotes
-			[ 3/8 ] // durations
+			[ 76, 72, 74, 71, 67 ], // midinotes
+			[ 1/16, 1/16, 1/16, 1/16, 1/8 ] // durations
 		],
 
 		[ // left hand
-			[ 60 ],
-			[ 3/8 ]
+			[ 55 ],
+			[ 2/8, Rest(1/8) ]
 		]
 	],
 
@@ -558,13 +558,13 @@
 	// ===========
 	[
 		[ // right hand
-			[ 60 ], // midinotes
-			[ 3/8 ] // durations
+			[ 69, 74, 78 ], // midinotes
+			[ 1/8, 1/8, 1/8 ] // durations
 		],
 
 		[ // left hand
-			[ 60 ],
-			[ 3/8 ]
+			[ [50, 54], [48, 57] ],
+			[ 2/8, 1/8 ]
 		]
 	],
 

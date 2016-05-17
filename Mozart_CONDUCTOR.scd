@@ -40,7 +40,7 @@
 
 
 // Manually send winners (1-12)
-~sendDiceWinner.value(rrand(1, 12));
+~sendDiceWinner.value(rrand(2, 12));
 
 ~tally;
 
