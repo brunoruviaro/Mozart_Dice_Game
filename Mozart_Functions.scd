@@ -1,6 +1,6 @@
 
 // put this somewhere player settings
-~destination = NetAddr("192.169.75.200", 57210);
+~destination = NetAddr("192.168.42.66", 57210);
 
 
 // ========
@@ -75,14 +75,14 @@ OSCdef(
 
 ~playMeasure = {arg measure = 1;
 
-Pbind(
+p = Pbind(
 	\midinote, Pseq(~score[measure][0][0]), // m#, RH, notes
 	\dur, Pseq(~score[measure][0][1]) * 8, // m#, RH, durs
 	\amp, 0.2,
 	\legato, 0.5,
 ).play(t, quant: 3);
 
-Pbind(
+q = Pbind(
 	\midinote, Pseq(~score[measure][1][0]), // m#, LH, notes
 	\dur, Pseq(~score[measure][1][1]) * 8, // m#, LH, durs
 	\amp, 0.2,
