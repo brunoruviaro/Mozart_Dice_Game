@@ -1,8 +1,3 @@
-
-// put this somewhere player settings
-~destination = NetAddr("192.168.42.66", 57210);
-
-
 // ========
 // OSCdefs
 // ========
