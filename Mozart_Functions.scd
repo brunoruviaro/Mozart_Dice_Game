@@ -127,9 +127,6 @@ OSCdef(
 
 ~sendVote = { arg vote; ~destination.sendMsg("/vote", vote) };
 
-~getNextMeasureNumber.value(1, 11, 7);
-
-
 
 
 
