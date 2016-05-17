@@ -61,7 +61,7 @@ OSCdef(
 			3; // repeat this function every 3 beats
 		})
 	},
-	path: 'start/local'
+	path: 'start'
 );
 
 
