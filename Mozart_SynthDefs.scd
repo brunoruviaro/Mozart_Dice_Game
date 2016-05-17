@@ -1,4 +1,4 @@
-
+s.waitForBoot({
 
 SynthDef("pluck", {arg amp = 0.1, freq = 440, decay = 5;
 
@@ -10,7 +10,11 @@ snd = Pluck.ar(
         maxdelaytime: 0.1,
         delaytime: freq.reciprocal,
         decaytime: decay,
-		coef: Lag.kr(In.kr(~wiiXbus), 1).clip(0.1, 0.9);
+		coef: LFNoise2.kr(1/4).range(0.1, 0.5);
+		);
     Out.ar(0, [snd, snd]);
 }).add;
+
+}); // end of Wait For Boot
+
 

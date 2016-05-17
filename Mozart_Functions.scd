@@ -72,6 +72,7 @@ OSCdef(
 ~playMeasure = {arg measure = 1;
 
 p = Pbind(
+		\instrument, ~synthName,
 	\midinote, Pseq(~score[measure][0][0]), // m#, RH, notes
 	\dur, Pseq(~score[measure][0][1]) * 8, // m#, RH, durs
 	\amp, 0.2,
@@ -79,6 +80,7 @@ p = Pbind(
 ).play(t, quant: 3);
 
 q = Pbind(
+		\instrument, ~synthName,
 	\midinote, Pseq(~score[measure][1][0]), // m#, LH, notes
 	\dur, Pseq(~score[measure][1][1]) * 8, // m#, LH, durs
 	\amp, 0.2,
