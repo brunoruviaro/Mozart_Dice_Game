@@ -26,33 +26,53 @@ OSCdef(
 	path: '/tempo/change'
 );
 
+// letterMeasure flag (who advances letter measures?)
+OSCdef(
+	key: \letterMeasureFlag,
+	func: { arg msg;
+		~letterMeasureFlag = msg[1];
+		if(msg[1]==0,
+			{
+				("Letter Measures A, B, C... advanced by conductor").postln;
+			},
+			{
+				("Letter Measures A, B, C... advanced locally").postln;
+			}
+		);
+
+	},
+	path: '/letterMeasureFlag'
+);
+
 ~winner = 3; // just an initialization value
+~letterMeasure = 0; // just an initialization value
 
 // start continuous playback
+
 OSCdef(
 	key: \startPlay,
 	func: {
-		var letterMeasure = 0;
+		var nextMeasure;
 		t.sched(0, {
-			// var dice = rrand(2, 12);
-			var dice = ~winner; // from election results
-			var measure = ~firstPart[dice][letterMeasure];
-			~playMeasure.value(measure);
-			letterMeasure = (letterMeasure + 1) % 8;
+			nextMeasure = ~getNextMeasureNumber.value(1, ~winner, ~letterMeasure);
+			~playMeasure.value(nextMeasure);
+			// advance letter measure locally?
+			if(~letterMeasureFlag==1, { ~letterMeasure = (~letterMeasure + 1) % 8 });
 			3; // repeat this function every 3 beats
-			// we are hoping a new ~winner measure will be defined by then. If not, it will just repeat the older one...
 		})
 	},
-	path: 'start'
+	path: 'start/local'
 );
 
 
-// incoming winner candidate ("dice")
+// incoming winner candidate ("dice") and optional letterMeasure
 OSCdef(
 	key: \incomingDice,
 	func: { arg msg;
 		~winner = msg[1];
 		("Incoming dice: " ++ ~winner).postln;
+		// advance letter measure?
+		if(~letterMeasureFlag==0, { ~letterMeasure = (~letterMeasure + 1) % 8 });
 	},
 	path: '/diceWinner'
 );
@@ -71,24 +91,34 @@ OSCdef(
 
 ~playMeasure = {arg measure = 1;
 
-p = Pbind(
+	p = Pbind(
 		\instrument, ~synthName,
-	\midinote, Pseq(~score[measure][0][0]), // m#, RH, notes
-	\dur, Pseq(~score[measure][0][1]) * 8, // m#, RH, durs
-	\amp, 0.2,
-	\legato, 0.5,
-).play(t, quant: 3);
+		\midinote, Pseq(~score[measure][0][0]), // m#, RH, notes
+		\dur, Pseq(~score[measure][0][1]) * 8, // m#, RH, durs
+		\amp, 0.2,
+		\legato, 0.5,
+	).play(t, quant: 3);
 
-q = Pbind(
+	q = Pbind(
 		\instrument, ~synthName,
-	\midinote, Pseq(~score[measure][1][0]), // m#, LH, notes
-	\dur, Pseq(~score[measure][1][1]) * 8, // m#, LH, durs
-	\amp, 0.2,
-	\legato, 0.5
-).play(t, quant: 3);
+		\midinote, Pseq(~score[measure][1][0]), // m#, LH, notes
+		\dur, Pseq(~score[measure][1][1]) * 8, // m#, LH, durs
+		\amp, 0.2,
+		\legato, 0.5
+	).play(t, quant: 3);
 };
 
+// ========================================
+// GET NEXT MEASURE NUMBER
+// Finds correct measure number to play
+// ========================================
 
+~getNextMeasureNumber = { arg part = 1, dice = 3, letterMeasure = 0;
+	if(part==1,
+		{ ~firstPart[dice][letterMeasure] },
+		{ ~secondPart[dice][letterMeasure] }
+	);
+};
 
 // =====================
 // SEND VOTE TO TALLY
@@ -97,7 +127,7 @@ q = Pbind(
 
 ~sendVote = { arg vote; ~destination.sendMsg("/vote", vote) };
 
-
+~getNextMeasureNumber.value(1, 11, 7);
 
 
 
@@ -122,12 +152,12 @@ q = Pbind(
 /*(
 var letterMeasure = 0;
 t.sched(0, {
-	var dice = rrand(2, 12); // from voting
-	var dice = ~winningMeasure;
-	var measure = ~firstPart[dice][letterMeasure];
-	~playMeasure.value(measure);
-	letterMeasure = (letterMeasure + 1) % 8;
-	3;
+var dice = rrand(2, 12); // from voting
+var dice = ~winningMeasure;
+var measure = ~firstPart[dice][letterMeasure];
+~playMeasure.value(measure);
+letterMeasure = (letterMeasure + 1) % 8;
+3;
 
 })
 )*/
