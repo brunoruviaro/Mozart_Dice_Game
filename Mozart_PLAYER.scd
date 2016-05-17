@@ -14,4 +14,4 @@
 
 
 // in case of emergency
-t.clear; p.stop; q.stop;
+p.stop; q.stop; t.clear;
