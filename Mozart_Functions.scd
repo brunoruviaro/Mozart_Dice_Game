@@ -46,14 +46,14 @@ OSCdef(
 );
 
 
-// winner measure
+// incoming winner candidate ("dice")
 OSCdef(
-	key: \winnerMeasure,
+	key: \incomingDice,
 	func: { arg msg;
 		~winner = msg[1];
-		("Incoming winning measure: " ++ ~winner).postln;
+		("Incoming dice: " ++ ~winner).postln;
 	},
-	path: '/measure/winner'
+	path: '/diceWinner'
 );
 
 
