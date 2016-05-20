@@ -42,7 +42,7 @@ OSCdef(
 		~tally[candidate] = currentCount + 1;
 	},
 	path: '/vote';
-);
+).permanent_(true);
 
 
 // find Winner Candidate ("dice result")
@@ -54,6 +54,3 @@ OSCdef(
 	~tally.postln;
 	~sendDiceWinner.value(diceWinner); // send it out
 };
-
-
-
