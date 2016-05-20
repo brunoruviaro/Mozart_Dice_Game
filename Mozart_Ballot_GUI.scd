@@ -4,11 +4,11 @@
 // SCLOrk, Spring 2016
 // ************************************
 
-var win, buttonArray;
+var win, buttonArray, superDelegates, supDel = 0;
 
 Window.closeAll;
 
-win = Window.new("Ballot", Rect(450, 160, 250, 190)).front;
+win = Window.new("Ballot", Rect(left: 450, top: 160, width: 250, height: 290)).front;
 
 win.alwaysOnTop = true;
 
@@ -29,10 +29,35 @@ buttonArray.do({arg item, count;
 		~sendVote.value(myVote);
 }});
 
+//
+superDelegates = Button.new(win.view, 230@50);
+superDelegates.states = [[ "SUPERDELEGATE MODE", Color.black, Color.yellow ]];
+superDelegates.action = {arg bt;
+	"printme".postln;
+	if(supDel==0,
+		{
+			{
+				supDel = 1;
+				{
+					{ superDelegates.states = [[ "SUPERDELEGATE MODE ON", Color.white, Color.red ]] }.defer;
+					0.1.wait;
+					{ superDelegates.states = [[ "CHEATER!", Color.black, Color.yellow ]] }.defer;
+					0.1.wait;
+				}.loop;
+			}.fork
+		},
+		{
+			"you ran out of superdelegates".postln;
+		}
+	);
+};
+
 
 win.onClose = {
 	Window.closeAll;
 	"Done!".postln;
+	TempoClock.clear;
+	s.freeAll;
 };
 
 CmdPeriod.doOnce({Window.closeAll});
