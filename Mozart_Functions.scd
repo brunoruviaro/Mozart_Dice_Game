@@ -69,10 +69,16 @@ OSCdef(
 OSCdef(
 	key: \incomingDice,
 	func: { arg msg;
-		~winner = msg[1];
-		("Incoming dice: " ++ ~winner).postln;
-		// advance letter measure?
-		if(~letterMeasureFlag==0, { ~letterMeasure = (~letterMeasure + 1) % 8 });
+		msg.postln;
+		if(msg[1]>0,
+			{
+				~winner = msg[1];
+				("Incoming dice: " ++ ~winner).postln;
+				// advance letter measure?
+				if(~letterMeasureFlag==0, { ~letterMeasure = (~letterMeasure + 1) % 8 });
+			},
+			{ "can't be zero, sorry" } // this means nobody voted yet
+		);
 	},
 	path: '/diceWinner'
 );
@@ -126,13 +132,6 @@ OSCdef(
 // Local player sends vote to remote computer
 
 ~sendVote = { arg vote; ~destination.sendMsg("/vote", vote) };
-
-
-
-
-
-
-
 
 
 
