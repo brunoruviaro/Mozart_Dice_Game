@@ -1,3 +1,12 @@
+// ==============
+// INIT VARIABLES
+// ==============
+
+~winner = 3; // just an initialization value
+~letterMeasure = 0; // just an initialization value
+~letterMeasureFlag = 0; // init value
+
+
 // ========
 // OSCdefs
 // ========
@@ -43,9 +52,6 @@ OSCdef(
 	},
 	path: '/letterMeasureFlag'
 );
-
-~winner = 3; // just an initialization value
-~letterMeasure = 0; // just an initialization value
 
 // start continuous playback
 
