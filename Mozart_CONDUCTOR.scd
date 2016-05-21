@@ -12,9 +12,6 @@
 // Change tempo anytime
 ~sendTempoChange.value(141);
 
-// Who advances letter measures? 0 = conductor does; 1 = local machines do.
-~advanceLetterMeasureFlag.value(0);
-
 // Start playing
 ~sendStartPlaying.value;
 
@@ -31,6 +28,12 @@
 // Still MANUAL...
 // findWinner, instantly send it to all computers, reset list
 ~findWinner.value;
+
+
+// probably no need for this
+// default set to 0
+// Who advances letter measures? 0 = conductor does; 1 = local machines do.
+// ~advanceLetterMeasureFlag.value(0);
 
 
 
