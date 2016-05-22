@@ -80,12 +80,13 @@ superDelegates.action = {arg bt;
 ~referendumText.align = \center;
 
 // Referendum
-referendumYes = Button.new(~referendumView, 60@50);
-referendumYes.states = [[ "YES", Color.black, Color.green ]];
 referendumNo = Button.new(~referendumView, 60@50);
 referendumNo.states = [[ "NO", Color.black, Color.red ]];
-referendumYes.action = { ~sendReferendumVote.value(1) };
+referendumYes = Button.new(~referendumView, 60@50);
+referendumYes.states = [[ "YES", Color.black, Color.green ]];
+
 referendumNo.action = { ~sendReferendumVote.value(0) };
+referendumYes.action = { ~sendReferendumVote.value(1) };
 
 
 win.onClose = {

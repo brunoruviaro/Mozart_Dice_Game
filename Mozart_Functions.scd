@@ -5,13 +5,15 @@
 ~winner = 3; // just an initialization value
 ~letterMeasure = 0; // just an initialization value
 ~letterMeasureFlag = 0; // init value
+~transpRH = 0;
+~transpLH = 0;
 ~referendumArray = [
 	/* 0 */ "faster?",
-	/* 0 */ "slower?",
-	/* 0 */ "transpose pretty?",
-	/* 0 */ "transpose prettier?",
-	/* 0 */ "make mozart great again?",
-	/* 0 */ "anarchy?"
+	/* 1 */ "slower?",
+	/* 2 */ "transpose pretty?",
+	/* 3 */ "transpose prettier?",
+	/* 4 */ "make mozart great again?",
+	/* 5 */ "chaos?"
 ];
 
 // ========
@@ -104,7 +106,8 @@ OSCdef(
 		msg.postln;
 		{
 			~referendumView.visible = true;
-			~referendumText.string = ~referendumArray[ msg[1] ]
+			~referendumText.string = ~referendumArray[ msg[1] ];
+			~currentReferendum = msg[1]; // to be used when choosing winner action
 
 		}.defer;
 	},
@@ -119,6 +122,49 @@ OSCdef(
 		{ ~referendumView.visible = false; }.defer;
 	},
 	path: '/endReferendum'
+);
+
+// get referendum winner
+OSCdef(
+	key: \referendumWinner,
+	func: { arg msg;
+		msg.postln;
+		if(msg[1]==1, // if winner was YES, take action
+			{
+				case
+				{ ~currentReferendum == 0 } // faster
+				{ t.tempo = t.tempo * 1.5 }
+
+				{ ~currentReferendum == 1 } // slower
+				{ t.tempo = t.tempo * 0.75 }
+
+				{ ~currentReferendum == 2 } // transpose pretty
+				{
+					~transpRH = ~transpRH + 2;
+					~transpLH = ~transpLH + 2;
+				}
+
+				{ ~currentReferendum == 3 } // transpose prettier
+				{
+					~transpRH = rrand(-2, 10);
+					~transpLH = rrand(-4, 5);
+				}
+
+				{ ~currentReferendum == 4 } // make mozart great again
+				{
+					~transpRH = 0;
+					~transpLH = 0;
+					t.tempo = 120/60;
+				}
+
+				{ ~currentReferendum == 5 }
+				{ "nothing here so far".postln }
+			},
+		);
+
+
+	},
+	path: '/referendumWinner'
 );
 
 
@@ -138,6 +184,7 @@ OSCdef(
 	p = Pbind(
 		\instrument, ~synthName,
 		\midinote, Pseq(~score[measure][0][0]), // m#, RH, notes
+		\ctranspose, Pfunc({ ~transpRH }),
 		\dur, Pseq(~score[measure][0][1]) * 8, // m#, RH, durs
 		\amp, 0.2,
 		\legato, 0.5,
@@ -146,6 +193,7 @@ OSCdef(
 	q = Pbind(
 		\instrument, ~synthName,
 		\midinote, Pseq(~score[measure][1][0]), // m#, LH, notes
+		\ctranspose, Pfunc({ ~transpLH }),
 		\dur, Pseq(~score[measure][1][1]) * 8, // m#, LH, durs
 		\amp, 0.2,
 		\legato, 0.5
