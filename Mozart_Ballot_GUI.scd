@@ -84,10 +84,8 @@ referendumYes = Button.new(~referendumView, 60@50);
 referendumYes.states = [[ "YES", Color.black, Color.green ]];
 referendumNo = Button.new(~referendumView, 60@50);
 referendumNo.states = [[ "NO", Color.black, Color.red ]];
-
-referendumYes.action = {arg bt; "yes".postln};
-
-referendumNo.action = {arg bt; "no".postln};
+referendumYes.action = { ~sendReferendumVote.value(1) };
+referendumNo.action = { ~sendReferendumVote.value(0) };
 
 
 win.onClose = {

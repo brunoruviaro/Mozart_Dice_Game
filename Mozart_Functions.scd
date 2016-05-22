@@ -171,6 +171,13 @@ OSCdef(
 
 ~sendVote = { arg vote; ~destination.sendMsg("/vote", vote) };
 
+// =====================
+// SEND REFERENDUM VOTE
+// =====================
+// Local player sends referendum vote to remote computer
+
+~sendReferendumVote = { arg vote; ~destination.sendMsg("/referendumVote", vote) };
+
 
 
 
