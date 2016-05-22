@@ -5,7 +5,14 @@
 ~winner = 3; // just an initialization value
 ~letterMeasure = 0; // just an initialization value
 ~letterMeasureFlag = 0; // init value
-
+~referendumArray = [
+	/* 0 */ "faster?",
+	/* 0 */ "slower?",
+	/* 0 */ "transpose pretty?",
+	/* 0 */ "transpose prettier?",
+	/* 0 */ "make mozart great again?",
+	/* 0 */ "anarchy?"
+];
 
 // ========
 // OSCdefs
@@ -97,14 +104,7 @@ OSCdef(
 		msg.postln;
 		{
 			~referendumView.visible = true;
-			~referendumText.string =
-			case
-			{msg[1]==0} {"faster?"}
-			{msg[1]==1} {"slower?"}
-			{msg[1]==2} {"transpose pretty?"}
-			{msg[1]==3} {"transpose more?"}
-			{msg[1]==4} {"anarchy?"};
-
+			~referendumText.string = ~referendumArray[ msg[1] ]
 
 		}.defer;
 	},
