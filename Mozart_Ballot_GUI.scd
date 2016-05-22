@@ -4,11 +4,11 @@
 // SCLOrk, Spring 2016
 // ************************************
 
-var win, buttonArray, superDelegates, supDel = 0;
+var win, buttonArray, superDelegates, supDel = 0, referendumText, referendumYes, referendumNo;
 
 Window.closeAll;
 
-win = Window.new("Ballot", Rect(left: 450, top: 160, width: 250, height: 290)).front;
+win = Window.new("Ballot", Rect(left: 450, top: 160, width: 250, height: 390)).front;
 
 win.alwaysOnTop = true;
 
@@ -69,6 +69,25 @@ superDelegates.action = {arg bt;
 		}
 	);
 };
+
+
+~referendumView = HLayoutView.new(win, 230@50);
+~referendumView.visible = false; // start invisible
+
+~referendumText = StaticText.new(~referendumView, 110@50);
+~referendumText.string = "Anarchy?";
+~referendumText.stringColor = Color.white;
+~referendumText.align = \center;
+
+// Referendum
+referendumYes = Button.new(~referendumView, 60@50);
+referendumYes.states = [[ "YES", Color.black, Color.green ]];
+referendumNo = Button.new(~referendumView, 60@50);
+referendumNo.states = [[ "NO", Color.black, Color.red ]];
+
+referendumYes.action = {arg bt; "yes".postln};
+
+referendumNo.action = {arg bt; "no".postln};
 
 
 win.onClose = {

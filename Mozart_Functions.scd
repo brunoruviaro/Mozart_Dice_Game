@@ -36,6 +36,7 @@ OSCdef(
 );
 
 // letterMeasure flag (who advances letter measures?)
+// probably obsolete (default is 0).
 OSCdef(
 	key: \letterMeasureFlag,
 	func: { arg msg;
@@ -87,6 +88,37 @@ OSCdef(
 		);
 	},
 	path: '/diceWinner'
+);
+
+// referendum START
+OSCdef(
+	key: \startReferendum,
+	func: { arg msg;
+		msg.postln;
+		{
+			~referendumView.visible = true;
+			~referendumText.string =
+			case
+			{msg[1]==0} {"faster?"}
+			{msg[1]==1} {"slower?"}
+			{msg[1]==2} {"transpose pretty?"}
+			{msg[1]==3} {"transpose more?"}
+			{msg[1]==4} {"anarchy?"};
+
+
+		}.defer;
+	},
+	path: '/startReferendum'
+);
+
+// referendum END
+OSCdef(
+	key: \endReferendum,
+	func: { arg msg;
+		msg.postln;
+		{ ~referendumView.visible = false; }.defer;
+	},
+	path: '/endReferendum'
 );
 
 
