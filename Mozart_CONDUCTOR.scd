@@ -10,27 +10,30 @@
 ~sendTempoStart.value(120);
 
 // Change tempo anytime
-~sendTempoChange.value(191);
+~sendTempoChange.value(91);
 
 // Start playing
 ~sendStartPlaying.value;
 
 // Print tally updates
 (
-{
+f = {
 	inf.do{
 		~tally.postln;
+		~referendumTally.postln;
 		0.9.wait;
 	}
 }.fork;
 )
+f.stop
 
 // Still MANUAL...
 // findWinner, instantly send it to all computers, reset list
 ~findWinner.value;
 
-~startReferendum.value(4);
-~endReferendum.value;
+~startReferendum.value(0);
+
+~findReferendumWinner.value;
 
 
 // probably no need for this

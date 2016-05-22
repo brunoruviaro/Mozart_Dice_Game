@@ -108,5 +108,6 @@ OSCdef(
 	["referendum winner is ", referendumWinner].postln;
 	~referendumTally = Array.fill(2, 0); // new array
 	~referendumTally.postln;
+	~endReferendum.value; // send end message to all
 	~sendReferendumWinner.value(referendumWinner); // send it out
 };
