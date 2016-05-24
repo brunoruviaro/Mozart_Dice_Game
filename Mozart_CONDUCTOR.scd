@@ -6,6 +6,9 @@
 // Load some functions
 "Mozart_Conductor_Functions.scd".loadRelative;
 
+// Load some functions
+"Mozart_Init_Variables.scd".loadRelative;
+
 // Start metronome
 ~sendTempoStart.value(120);
 
