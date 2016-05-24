@@ -99,6 +99,7 @@ buttonStartPlaying.action = {arg bt;
 		{
 			"quit mozart".postln;
 			f.stop;
+			~sendStopPlaying.value;
 		}
 	);
 };
