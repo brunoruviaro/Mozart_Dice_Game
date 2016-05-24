@@ -64,6 +64,20 @@ OSCdef(
 	path: 'start'
 );
 
+// STOP playback (receive conductor command).
+
+OSCdef(
+	key: \stopPlay,
+	func: {
+		Window.closeAll;
+		"Done!".postln;
+		TempoClock.clear;
+		s.freeAll;
+		p.stop; q.stop; t.clear;
+	},
+	path: 'stop'
+);
+
 
 // incoming winner candidate ("dice") and optional letterMeasure
 OSCdef(

@@ -4,19 +4,35 @@
 "Mozart_IP_Addresses.scd".loadRelative;
 
 // Load some functions
-"Mozart_Conductor_Functions.scd".loadRelative;
-
-// Load some functions
 "Mozart_Init_Variables.scd".loadRelative;
 
+// Load some functions
+"Mozart_Conductor_Functions.scd".loadRelative;
+
+// Load GUI
+"Mozart_Conductor_GUI.scd".loadRelative;
+
+
+
+
+
+
+
+// ================================================
+
+
+
+// we no longer need to run the code below manually
+// it's all in the GUI
+
 // Start metronome
-~sendTempoStart.value(120);
+// ~sendTempoStart.value(120);
 
 // Change tempo anytime
-~sendTempoChange.value(91);
+// ~sendTempoChange.value(191);
 
 // Start playing
-~sendStartPlaying.value;
+// ~sendStartPlaying.value;
 
 // Print tally updates
 (
@@ -32,11 +48,11 @@ f.stop
 
 // Still MANUAL...
 // findWinner, instantly send it to all computers, reset list
-~findWinner.value;
+// ~findWinner.value;
 
-~startReferendum.value(0);
+// ~startReferendum.value(4);
 
-~findReferendumWinner.value;
+// ~findReferendumWinner.value;
 
 
 // probably no need for this
