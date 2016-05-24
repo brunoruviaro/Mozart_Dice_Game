@@ -134,7 +134,7 @@ countVotes.action = {arg bt;
 // REFERENDUM
 referendumMenu = EZPopUpMenu.new(
 	parentView: win,
-	bounds: 400@50,
+	bounds: 430@50,
 	label: "REFERENDUM",
 	items: (["pick item to start..."] ++ ~referendumArray).collect({arg i; i.asSymbol}),
 	globalAction: { arg menu;

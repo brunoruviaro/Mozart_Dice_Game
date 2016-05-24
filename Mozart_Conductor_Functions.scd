@@ -16,10 +16,10 @@
 };
 
 // function to send start trigger to everyone
-~sendStartPlaying = { ~ips.do({ arg item; item.sendMsg("/start", "go")}) };
+~sendStartPlaying = { ~ips.do({ arg item; item.sendMsg("/start", "go") }) };
 
 // function to send STOP signal to everyone
-~sendStopPlaying = { ~ips.do({ arg item; item.sendMsg("/stop", "STOP")}) };
+~sendStopPlaying = { ~ips.do({ arg item; item.sendMsg("/stop", "STOP") }) };
 
 // function to send "dice" winner candidate to everyone
 ~sendDiceWinner = { arg diceWinner; ~ips.do({ arg item; item.sendMsg("/diceWinner", diceWinner)}) };

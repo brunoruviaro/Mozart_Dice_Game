@@ -69,7 +69,7 @@ OSCdef(
 OSCdef(
 	key: \stopPlay,
 	func: {
-		Window.closeAll;
+		{ Window.closeAll }.defer;
 		"Done!".postln;
 		TempoClock.clear;
 		s.freeAll;

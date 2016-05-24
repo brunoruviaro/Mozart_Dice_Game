@@ -3,7 +3,7 @@
 // Load IPs
 "Mozart_IP_Addresses.scd".loadRelative;
 
-// Load some functions
+// Load some variables
 "Mozart_Init_Variables.scd".loadRelative;
 
 // Load some functions
@@ -11,7 +11,6 @@
 
 // Load GUI
 "Mozart_Conductor_GUI.scd".loadRelative;
-
 
 
 
