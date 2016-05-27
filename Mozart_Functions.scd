@@ -184,8 +184,8 @@ OSCdef(
 		\midinote, Pseq(~score[measure][0][0]), // m#, RH, notes
 		\ctranspose, Pfunc({ ~transpRH }),
 		\dur, Pseq(~score[measure][0][1]) * 8, // m#, RH, durs
-		\amp, 0.2,
-		\legato, 0.5,
+		\amp, 0.4,
+		\legato, 0.9,
 	).play(t, quant: 3);
 
 	q = Pbind(
@@ -194,7 +194,8 @@ OSCdef(
 		\ctranspose, Pfunc({ ~transpLH }),
 		\dur, Pseq(~score[measure][1][1]) * 8, // m#, LH, durs
 		\amp, 0.2,
-		\legato, 0.5
+		\legato, 0.5,
+		\decay, 3
 	).play(t, quant: 3);
 };
 

@@ -32,7 +32,7 @@ s.waitForBoot({
 
 		envAM = Env.perc(attackTime: att, releaseTime: decay/2, level: ampAM).kr;
 		modulator = SinOsc.kr(freq: LFNoise2.kr(1/4).range(1.5, 2.1));
-		carrier = SinOsc.ar(freq: [freq/2, freq*2.5, freq*4], mul: envAM * modulator) * [1, 0.01, 0.01];
+		carrier = SinOsc.ar(freq: [freq, freq*2.5, freq*4], mul: envAM * modulator) * [1, 0.01, 0.01];
 		carrier = LPF.ar(carrier, LFNoise2.kr(3).range(1000, 5000));
 
 		snd = Mix.ar(snd + carrier);
