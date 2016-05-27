@@ -60,7 +60,7 @@ f.stop
 // probably no need for this
 // default set to 0
 // Who advances letter measures? 0 = conductor does; 1 = local machines do.
-// ~advanceLetterMeasureFlag.value(0);
+// ~advanceLetterMeasureFlag.value(1);
 
 
 

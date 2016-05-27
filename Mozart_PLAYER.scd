@@ -3,7 +3,8 @@
 
 (
 // ~synthName = "default";
-~synthName = "pluck";
+// ~synthName = "pluck";
+~synthName = "pluckAM";
 "Mozart_IP_Addresses.scd".loadRelative;
 "Mozart_Init_Variables.scd".loadRelative;
 "Mozart_Functions.scd".loadRelative;
