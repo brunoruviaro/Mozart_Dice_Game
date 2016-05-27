@@ -48,7 +48,8 @@ buttonTempoClock.action = {arg bt;
 	if(bt.value==0,
 		{
 			"started".postln;
-			~sendTempoStart.value(140);
+			~sendTempoStart.value(180);
+			textBPM.value = 180;
 		},
 		{
 			"stopped".postln;
