@@ -54,10 +54,10 @@ OSCdef(
 	func: {
 		var nextMeasure;
 		t.sched(0, {
-			nextMeasure = ~getNextMeasureNumber.value(1, ~winner, ~letterMeasure);
+			nextMeasure = ~getNextMeasureNumber.value(~part, ~winner, ~letterMeasure);
 			~playMeasure.value(nextMeasure);
 			// advance letter measure locally?
-			if(~letterMeasureFlag==1, { ~letterMeasure = (~letterMeasure + 1) % 8 });
+			if(~letterMeasureFlag==1, { ~advance.value });
 			3; // repeat this function every 3 beats
 		})
 	},
@@ -88,8 +88,8 @@ OSCdef(
 			{
 				~winner = msg[1];
 				("Incoming dice: " ++ ~winner).postln;
-				// advance letter measure?
-				if(~letterMeasureFlag==0, { ~letterMeasure = (~letterMeasure + 1) % 8 });
+				// advance letter measure? (default is 0)
+				if(~letterMeasureFlag==0, { ~advance.value });
 			},
 			{ "can't be zero, sorry" } // this means nobody voted yet
 		);
@@ -197,6 +197,42 @@ OSCdef(
 		\legato, 0.5
 	).play(t, quant: 3);
 };
+
+// ========================================
+// ADVANCE "TRANSPORT" (~letterMeasure and ~part)
+// Move to next column in Number Table
+// Move to Part II (and back to I) after 2 repeats
+// ========================================
+
+~advance = {
+
+	// count repeats
+	if(~letterMeasure==7,
+		{
+			~moveToNextPartFlag = ~moveToNextPartFlag + 1;
+		}
+	);
+
+	// advance letter measure
+	~letterMeasure = (~letterMeasure + 1) % 8;
+
+	// move to next part if it's time to do so
+	if(~moveToNextPartFlag==2,
+		{
+			case
+			{~part==1} {~part = 2}
+			{~part==2} {~part = 1};
+			~moveToNextPartFlag = 0;
+		}
+	);
+
+
+	// ("Part " ++ ~part).postln;
+	// ("Column " ++ ~letterMeasure).postln;
+	// " ".postln;
+
+};
+
 
 // ========================================
 // GET NEXT MEASURE NUMBER

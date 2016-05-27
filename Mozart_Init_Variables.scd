@@ -2,11 +2,14 @@
 // INIT VARIABLES
 // ==============
 
-~winner = 3; // just an initialization value
-~letterMeasure = 0; // just an initialization value
-~letterMeasureFlag = 0; // init value
-~transpRH = 0;
-~transpLH = 0;
+~winner = 3; // dice results
+~part = 1; // part I or part II of the piece
+~moveToNextPartFlag = 0; // keeps track of when to move to next part
+~letterMeasure = 0; // 0-7 columns from Number Tables (A, B, C, D, E, F, G, H)
+~letterMeasureFlag = 0; // convenience tool for debugging ('who advances measures - conductor or local?')
+~transpRH = 0; // transposition in semitones for right hand
+~transpLH = 0; // transposition in semitones for left hand
+// referendum options below:
 ~referendumArray = [
 	/* 0 */ "faster?",
 	/* 1 */ "slower?",
