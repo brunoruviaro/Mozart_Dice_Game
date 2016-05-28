@@ -40,6 +40,7 @@ superDelegates.action = {arg bt;
 	if(supDel==0,
 		{
 			var blink, implode;
+			~destination.sendMsg("/superD", 1); // flashing sign on conductor screen
 			supDel = 1;
 			blink = {
 				{
@@ -54,6 +55,7 @@ superDelegates.action = {arg bt;
 				"BOOOOOOOM".postln;
 				blink.stop;
 				supDel = 2; // back to normal 1:1 vote, 'de-activate' button
+				~destination.sendMsg("/superD", 0);
 				{
 					superDelegates.states = [
 						[ "you ran out of superdelegates", Color.black, Color.white ],

@@ -78,6 +78,15 @@ OSCdef(
 	~tally = Array.fill(~numberOfCandidates, 0); // new array
 	~tally.postln;
 	~sendDiceWinner.value(diceWinner); // send it out
+	// if protest vote, turn flashing sign on
+	if(diceWinner==1,
+		{
+			~protestSignAlert.value(1);
+		},
+		{
+			~protestSignAlert.value(0);
+		}
+	);
 };
 
 // =======================================
@@ -114,3 +123,21 @@ OSCdef(
 	~endReferendum.value; // send end message to all
 	~sendReferendumWinner.value(referendumWinner); // send it out
 };
+
+// =======================================
+// ALERT SYSTEM
+// display flashing signs for Protest Vote
+// and SuperDelegate Mode
+// =======================================
+
+// get superdelegate warning from players
+OSCdef(
+	key: \superdelegate,
+	func: { arg msg;
+		var flag = msg[1]; // 0 = off, 1 = on
+		~superdelegateAlert.value(flag);
+	},
+	path: '/superD';
+).permanent_(true);
+
+// NOTE: "Protest Vote" sign is turned on and off directly inside "findWinner" function.
