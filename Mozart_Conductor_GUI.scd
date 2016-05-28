@@ -130,7 +130,7 @@ textBPM = EZText.new(
 		~bpm = ez.value;
 		countVotes.focus(true);
 	},
-	initVal: ~bpm,
+	initVal: ~bpm.asInteger,
 	layout: \vert
 );
 
@@ -218,9 +218,9 @@ endReferendumButton.action = {arg bt;
 	if(refWinner==1,
 		{
 			case
-			{~currentReferendum==0}{textBPM.value = ~bpm * 1.25; ~bpm = ~bpm * 1.25}
-			{~currentReferendum==1}{textBPM.value = ~bpm * 0.8; ~bpm = ~bpm * 0.8}
-			{~currentReferendum==4}{textBPM.value = 170; ~bpm = 170}
+			{~currentReferendum==0}{~bpm = (~bpm * 1.25).asInteger; textBPM.value = ~bpm}
+			{~currentReferendum==1}{~bpm = (~bpm * 0.8).asInteger; textBPM.value = ~bpm}
+			{~currentReferendum==4}{~bpm = 170; textBPM.value = ~bpm; }
 
 		};
 	);
