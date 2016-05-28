@@ -62,8 +62,8 @@ buttonTempoClock.action = {arg bt;
 	if(bt.value==0,
 		{
 			"started".postln;
-			~sendTempoStart.value(180);
-			textBPM.value = 180;
+			~sendTempoStart.value(~bpm);
+			textBPM.value = ~bpm;
 		},
 		{
 			"stopped".postln;
@@ -127,9 +127,10 @@ textBPM = EZText.new(
 	action: { arg ez;
 		ez.value.postln;
 		~sendTempoChange.value(ez.value);
+		~bpm = ez.value;
 		countVotes.focus(true);
 	},
-	initVal: 180,
+	initVal: ~bpm,
 	layout: \vert
 );
 
@@ -174,6 +175,7 @@ referendumMenu = EZPopUpMenu.new(
 				// I added the "pick item to start..."
 				// as first item just for pop up menu
 				~startReferendum.value(menu.value - 1);
+				~currentReferendum = menu.value - 1;
 				endReferendumButton.visible = true;
 				endReferendumButton.focus(true);
 			};
@@ -208,10 +210,21 @@ endReferendumButton.states = [
 ];
 endReferendumButton.font = Font.new(Font.default, 20, true);
 endReferendumButton.action = {arg bt;
+	var refWinner;
 	"counting referendum votes...".postln;
-	~findReferendumWinner.value;
+	refWinner = ~findReferendumWinner.value;
 	endReferendumButton.visible = false;
 	referendumMenu.value = 0;
+	if(refWinner==1,
+		{
+			case
+			{~currentReferendum==0}{textBPM.value = ~bpm * 1.25; ~bpm = ~bpm * 1.25}
+			{~currentReferendum==1}{textBPM.value = ~bpm * 0.8; ~bpm = ~bpm * 0.8}
+			{~currentReferendum==4}{textBPM.value = 170; ~bpm = 170}
+
+		};
+	);
+
 };
 endReferendumButton.visible = false;
 

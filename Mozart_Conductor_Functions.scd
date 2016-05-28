@@ -36,9 +36,6 @@
 // end referendum
 ~endReferendum = { ~ips.do({ arg item; item.sendMsg("/endReferendum")}) };
 
-// start referendum should set a variable indicating ref type (anarchy, slower, faster, transpose, etc).
-// end referendum should call a function to tally Y/N votes, and act upon results calling another function to make it happen.
-
 // function to tell players to either ADVANCE (1) or NOT ADVANCE (0) letter measures locally.
 ~advanceLetterMeasureFlag = { arg flag = 0; ~ips.do({ arg item; item.sendMsg("/letterMeasureFlag", flag)}) };
 
@@ -122,6 +119,7 @@ OSCdef(
 	~referendumTally.postln;
 	~endReferendum.value; // send end message to all
 	~sendReferendumWinner.value(referendumWinner); // send it out
+	referendumWinner;
 };
 
 // =======================================

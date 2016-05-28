@@ -2,6 +2,7 @@
 // INIT VARIABLES
 // ==============
 
+~bpm = 180; //
 ~winner = 3; // dice results
 ~part = 1; // part I or part II of the piece
 ~moveToNextPartFlag = 0; // keeps track of when to move to next part
@@ -9,6 +10,7 @@
 ~letterMeasureFlag = 0; // convenience tool for debugging ('who advances measures - conductor or local?')
 ~transpRH = 0; // transposition in semitones for right hand
 ~transpLH = 0; // transposition in semitones for left hand
+~currentReferendum = 0;
 // referendum options below:
 ~referendumArray = [
 	/* 0 */ "faster?",

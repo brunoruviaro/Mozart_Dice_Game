@@ -131,10 +131,10 @@ OSCdef(
 			{
 				case
 				{ ~currentReferendum == 0 } // faster
-				{ t.tempo = t.tempo * 1.5 }
+				{ t.tempo = t.tempo * 1.25 }
 
 				{ ~currentReferendum == 1 } // slower
-				{ t.tempo = t.tempo * 0.75 }
+				{ t.tempo = t.tempo * 0.8 }
 
 				{ ~currentReferendum == 2 } // transpose pretty
 				{
@@ -152,7 +152,7 @@ OSCdef(
 				{
 					~transpRH = 0;
 					~transpLH = 0;
-					t.tempo = 120/60;
+					t.tempo = 170/60;
 				}
 
 				{ ~currentReferendum == 5 }
