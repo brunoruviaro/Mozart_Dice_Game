@@ -1,21 +1,32 @@
 // Mozart Conductor GUI
 
 
-var win, winW, winH, textArray, buttonTempoClock, textBPM, buttonStartPlaying, countVotes, endReferendumButton, referendumMenu, multiSlider, refYtext, refNtext;
+var parentWin, win, winW, winH, textArray, buttonTempoClock, textBPM, buttonStartPlaying, countVotes, endReferendumButton, referendumMenu, multiSlider, refYtext, refNtext;
 
 winW = 900;
 winH = 550;
 
 Window.closeAll;
 
-win = Window.new("Conductor", Rect(left: 450, top: 160, width: winW, height: winH)).front;
+parentWin = Window.new("Conductor", Window.screenBounds).front;
+parentWin.alwaysOnTop = true;
 
-win.alwaysOnTop = true;
+win = CompositeView.new(
+	parent: parentWin,
+	bounds: Rect(
+		left: ((Window.screenBounds.width - winW) / 2).round(1);,
+		top: 60,
+		width: winW,
+		height: winH)
+);
 
+// win = Window.new("Conductor", Rect(left: 450, top: 160, width: winW, height: winH)).front;
+
+// parentWin.background = Color.new255(255, 255, 255, 255);
 win.background = Color.new255(102, 102, 102, 255);
 
 // Change the gaps and margins to see how they work
-win.view.decorator = FlowLayout(win.view.bounds, margin: 10@10, gap: 10@10 );
+win.decorator = FlowLayout(win.bounds, margin: 10@10, gap: 10@10 );
 
 // Multislider
 multiSlider = MultiSliderView(win, 880@200);
