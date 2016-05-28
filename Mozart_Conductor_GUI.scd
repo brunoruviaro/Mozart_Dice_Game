@@ -1,7 +1,7 @@
 // Mozart Conductor GUI
 
 
-var parentWin, win, winW, winH, textArray, buttonTempoClock, textBPM, buttonStartPlaying, countVotes, endReferendumButton, referendumMenu, multiSlider, refYtext, refNtext;
+var parentWin, win, winW, winH, textArray, buttonTempoClock, textBPM, buttonStartPlaying, countVotes, shortcutCtext, endReferendumButton, referendumMenu, multiSlider, refYtext, refNtext;
 
 winW = 900;
 winH = 550;
@@ -23,6 +23,10 @@ win = CompositeView.new(
 
 // parentWin.background = Color.new255(255, 255, 255, 255);
 win.background = Color.new255(102, 102, 102, 255);
+
+shortcutCtext = StaticText.new(win, Rect(winW - 145, winH - 225, 100, 50));
+shortcutCtext.string = "shortcut C";
+shortcutCtext.font = Font.new(Font.default, 11);
 
 // Change the gaps and margins to see how they work
 win.decorator = FlowLayout(win.bounds, margin: 10@10, gap: 10@10 );
@@ -50,7 +54,7 @@ textArray.do({arg item;
 // START METRONOME BUTTON
 buttonTempoClock = Button.new(win, 286@100);
 buttonTempoClock.states = [
-	[ "(re)start metronome", Color.black, Color.yellow(0.9, 0.92) ],
+	[ "START METRONOME", Color.black, Color.yellow(0.9, 0.92) ],
 	// [ "Metronome OFF", Color.white, Color.red(0.9, 0.5) ]
 ];
 buttonTempoClock.font = Font.new(Font.default, 20, true);
@@ -89,7 +93,7 @@ buttonStartPlaying.action = {arg bt;
 					{
 						// update number views (main voting)
 						textArray.do({arg item, count;
-						item.string = ~tally[count+1]
+							item.string = ~tally[count+1]
 						});
 						// update multislider (main voting)
 						if(~tally.maxItem<200,
@@ -134,12 +138,24 @@ textBPM.setColors(stringColor: Color.white);
 // COUNT VOTES
 countVotes = Button.new(win, 210@100);
 countVotes.states = [
-	[ "COUNT VOTES", Color.black, Color.gray(0.9, 0.92) ],
+	[ "COUNT VOTES", Color.black, Color.gray(0.9, 0.6) ],
 ];
 countVotes.font = Font.new(Font.default, 20, true);
 countVotes.action = {arg bt;
-			"tallying votes...".postln;
-			~findWinner.value;
+	"tallying votes...".postln;
+	~findWinner.value;
+	{
+		{ bt.states = [[ "COUNT VOTES", Color.white, Color.black ]] }.defer;
+		0.1.wait;
+		{ bt.states = [[ "COUNT VOTES", Color.black, Color.gray(0.9, 0.6) ]] }.defer;
+	}.fork;
+};
+
+win.keyDownAction = {arg view, char, mod, unicode;
+	if((unicode==99) || (unicode==67),
+		{ countVotes.valueAction = 0; },
+		{ "no action for keys other than C" }
+	);
 };
 
 
