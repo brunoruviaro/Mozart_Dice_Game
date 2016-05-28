@@ -1,7 +1,7 @@
 // Mozart Conductor GUI
 
 
-var parentWin, win, winW, winH, textArray, buttonTempoClock, textBPM, buttonStartPlaying, countVotes, shortcutCtext, endReferendumButton, referendumMenu, multiSlider, refYtext, refNtext;
+var parentWin, win, winW, winH, textArray, buttonTempoClock, textBPM, buttonStartPlaying, countVotes, shortcutCtext, endReferendumButton, referendumMenu, multiSlider, refYtext, refNtext, protestSign, superdelegateWarning;
 
 winW = 900;
 winH = 550;
@@ -215,6 +215,81 @@ endReferendumButton.action = {arg bt;
 };
 endReferendumButton.visible = false;
 
+protestSign = StaticText.new(win, (winW/2-15)@90);
+protestSign.string = "#1 = Protest Vote!";
+protestSign.align = \center;
+protestSign.font = Font.new(Font.default, 28, true);
+protestSign.background = Color.gray(0.9, 0.91);
+protestSign.stringColor = Color.red;
+protestSign.visible = false;
+
+superdelegateWarning = StaticText.new(win, (winW/2-15)@90);
+superdelegateWarning.string = "[WARNING: SOMEONE IS IN SUPERDELEGATE MODE]";
+superdelegateWarning.align = \center;
+superdelegateWarning.font = Font.new(Font.default, 21, true);
+superdelegateWarning.stringColor = Color.black;
+superdelegateWarning.background = Color.gray(0.9, 0.91);
+superdelegateWarning.visible = false;
+
+~sda = nil;
+~superdelegateAlert = {arg onOff = 0;
+	"running function".postln;
+	case
+	// case1: turn flashing on
+	{ (onOff==1) && (~sda==nil) }
+	{
+		// "onOff is 1, sda is nil".postln;
+		~sda = {
+			{
+				{ superdelegateWarning.visible = true }.defer;
+				0.35.wait;
+				{ superdelegateWarning.visible = false }.defer;
+				0.35.wait;
+				// "end of loop".postln
+			}.loop;
+		}.fork;
+	}
+	// case2: turn flashing off
+	{ (onOff==0) && (~sda!=nil) }
+	{
+		// "onOff is 0, sda was not nil, but now should be".postln;
+		~sda.stop;
+		~sda = nil;
+		superdelegateWarning.visible = false;
+	};
+};
+
+~psa = nil;
+~protestSignAlert = {arg onOff = 0;
+	"running function".postln;
+	case
+	// case1: turn flashing on
+	{ (onOff==1) && (~psa==nil) }
+	{
+		~psa = {
+			{
+				{ protestSign.visible = true }.defer;
+				0.35.wait;
+				{ protestSign.visible = false }.defer;
+				0.15.wait;
+				// "end of loop".postln
+			}.loop;
+		}.fork;
+	}
+	// case2: turn flashing off
+	{ (onOff==0) && (~psa!=nil) }
+	{
+		~psa.stop;
+		~psa = nil;
+		protestSign.visible = false
+	};
+};
+
+parentWin.onClose = {
+	~sda.stop; ~sda = nil;
+	~psa.stop; ~psa = nil;
+
+};
 
 //
 // t = StaticText.new(win, Rect(10, 10, winW - 10, 50))
