@@ -233,7 +233,7 @@ superdelegateWarning.visible = false;
 
 ~sda = nil;
 ~superdelegateAlert = {arg onOff = 0;
-	"running function".postln;
+	"running SD function".postln;
 	case
 	// case1: turn flashing on
 	{ (onOff==1) && (~sda==nil) }
@@ -252,10 +252,10 @@ superdelegateWarning.visible = false;
 	// case2: turn flashing off
 	{ (onOff==0) && (~sda!=nil) }
 	{
-		// "onOff is 0, sda was not nil, but now should be".postln;
+		"onOff is 0, sda was not nil, but now should be".postln;
 		~sda.stop;
 		~sda = nil;
-		superdelegateWarning.visible = false;
+		{ superdelegateWarning.visible = false }.defer;
 	};
 };
 
