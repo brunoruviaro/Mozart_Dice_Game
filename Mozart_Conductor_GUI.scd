@@ -8,8 +8,9 @@ winH = 550;
 
 Window.closeAll;
 
-parentWin = Window.new("Conductor", Window.screenBounds).front;
+parentWin = Window.new("Conductor", Window.screenBounds);
 parentWin.alwaysOnTop = true;
+parentWin.front;
 
 win = CompositeView.new(
 	parent: parentWin,
@@ -19,8 +20,6 @@ win = CompositeView.new(
 		width: winW,
 		height: winH)
 );
-
-// win = Window.new("Conductor", Rect(left: 450, top: 160, width: winW, height: winH)).front;
 
 // parentWin.background = Color.new255(255, 255, 255, 255);
 win.background = Color.new255(102, 102, 102, 255);
