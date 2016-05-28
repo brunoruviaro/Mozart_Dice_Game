@@ -127,8 +127,9 @@ textBPM = EZText.new(
 	action: { arg ez;
 		ez.value.postln;
 		~sendTempoChange.value(ez.value);
+		countVotes.focus(true);
 	},
-	initVal: 120,
+	initVal: 180,
 	layout: \vert
 );
 
@@ -174,6 +175,7 @@ referendumMenu = EZPopUpMenu.new(
 				// as first item just for pop up menu
 				~startReferendum.value(menu.value - 1);
 				endReferendumButton.visible = true;
+				endReferendumButton.focus(true);
 			};
 		);
 	},
