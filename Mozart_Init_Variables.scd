@@ -10,6 +10,8 @@
 ~letterMeasureFlag = 0; // convenience tool for debugging ('who advances measures - conductor or local?')
 ~transpRH = 0; // transposition in semitones for right hand
 ~transpLH = 0; // transposition in semitones for left hand
+~ampScaleRH = 1; // scaling factor for right hand amplitude (per note)
+~ampScaleLH = 1; // scaling factor for left hand amplitude (per note)
 ~currentReferendum = 0;
 // referendum options below:
 ~referendumArray = [
@@ -18,5 +20,5 @@
 	/* 2 */ "transpose pretty?",
 	/* 3 */ "transpose prettier?",
 	/* 4 */ "make mozart great again?",
-	/* 5 */ "chaos?"
+	/* 5 */ "lesser evil?"
 ];

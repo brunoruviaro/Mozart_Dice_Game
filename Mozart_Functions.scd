@@ -152,11 +152,18 @@ OSCdef(
 				{
 					~transpRH = 0;
 					~transpLH = 0;
+					~ampScaleRH = 1;
+					~ampScaleLH = 1;
 					t.tempo = 170/60;
 				}
 
-				{ ~currentReferendum == 5 }
-				{ "nothing here so far".postln }
+				{ ~currentReferendum == 5 } // lesser evil
+				{
+					~transpRH = { rrand(12, 13) };
+					~transpLH = { rrand(-12, -13) };
+					~ampScaleRH = { rrand(0.5, 2) };
+					~ampScaleLH = { rrand(0.1, 1) }
+				}
 			},
 		);
 
@@ -184,7 +191,7 @@ OSCdef(
 		\midinote, Pseq(~score[measure][0][0]), // m#, RH, notes
 		\ctranspose, Pfunc({ ~transpRH }),
 		\dur, Pseq(~score[measure][0][1]) * 8, // m#, RH, durs
-		\amp, 0.4,
+		\amp, 0.4 * Pfunc({ ~ampScaleRH }),
 		\legato, 0.9,
 	).play(t, quant: 3);
 
@@ -193,7 +200,7 @@ OSCdef(
 		\midinote, Pseq(~score[measure][1][0]), // m#, LH, notes
 		\ctranspose, Pfunc({ ~transpLH }),
 		\dur, Pseq(~score[measure][1][1]) * 8, // m#, LH, durs
-		\amp, 0.2,
+		\amp, 0.2 * Pfunc({ ~ampScaleLH }),
 		\legato, 0.5,
 		\decay, 3
 	).play(t, quant: 3);

@@ -215,6 +215,7 @@ endReferendumButton.action = {arg bt;
 	refWinner = ~findReferendumWinner.value;
 	endReferendumButton.visible = false;
 	referendumMenu.value = 0;
+	// update bpm display as needed
 	if(refWinner==1,
 		{
 			case
