@@ -159,10 +159,10 @@ OSCdef(
 
 				{ ~currentReferendum == 5 } // lesser evil
 				{
-					~transpRH = { rrand(12, 13) };
-					~transpLH = { rrand(-12, -13) };
-					// ~ampScaleRH = { rrand(0.5, 2) };
-					// ~ampScaleLH = { rrand(0.1, 1) }
+					~transpRH =  { rrand(11, 13) };
+					~transpLH =  { rrand(11, 13) };
+					~ampScaleRH = { rrand(0.4, 1) };
+					~ampScaleLH = { rrand(0.1, 0.7) }
 				}
 			},
 		);
