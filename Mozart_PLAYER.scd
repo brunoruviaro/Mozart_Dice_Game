@@ -5,7 +5,7 @@
 // ~synthName = "default";
 // ~synthName = "pluck";
 ~synthName = "pluckAM";
-"Mozart_IP_Addresses.scd".loadRelative;
+~destination = NetAddr("sclork-01.local", 57120); // conductor IP address
 "Mozart_Init_Variables.scd".loadRelative;
 "Mozart_Functions.scd".loadRelative;
 "Mozart_Musical_Dice_Full_Score.scd".loadRelative;
