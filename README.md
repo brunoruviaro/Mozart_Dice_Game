@@ -1,14 +1,14 @@
 # Mozart and the Elections
-For Laptop Orchestra, based on Mozart's Musical Dice Game
+*For Laptop Orchestra, based on Mozart's Musical Dice Game*
+by Bruno Ruviaro
 
 Premiered by SCLOrk (the Santa Clara Laptop Orchestra) on June 2, 2016 at Santa Clara University.
 
-Program notes:
-This is a tragicomic piece on the state of American democracy through the lenses of Mozart’s Musical Dice Game. It was composed during the presidential primaries season of 2016. Each player obsessively votes as fast as they can to elect the next measure from a pool of candidates. A supposedly fair conductor counts the votes when he or she wishes. Players can use a Super Delegate button to make their votes be worth 10 times more than everyone else’s. Every now and then the conductor throws referendum questions to the players to decide the development of the piece. Referendum questions used in this performance were: “Slower?” — “Faster?” — “Transpose Pretty?” — “Transpose Prettier?” — “Make Mozart Great Again?” — “Lesser Evil?”
+### Program notes:
 
-The audience follows everything on screen by watching the conductors “dashboard”. The piece ends when the system crashes.
+> This is a tragicomic piece on the state of American democracy through the lenses of Mozart’s Musical Dice Game. It was composed during the presidential primaries season of 2016. Each player obsessively votes as fast as they can to elect the next measure from a pool of candidates. A supposedly fair conductor counts the votes when he or she wishes. Players can use a Super Delegate button to make their votes be worth 10 times more than everyone else’s. Every now and then the conductor throws referendum questions to the players to decide the development of the piece. Referendum questions used in this performance were: “Slower?” — “Faster?” — “Transpose Pretty?” — “Transpose Prettier?” — “Make Mozart Great Again?” — “Lesser Evil?”. The audience follows everything on screen by watching the conductors “dashboard”. The piece ends when the system crashes.
 
-# Mozart's Dice Game
+## About Mozart's Dice Game
 
 "To Compose Without The Least Knowledge of Music so Much German Walzer or Schleifer as one pleases, by throwing a certain number with two dice."
 
@@ -16,7 +16,7 @@ https://en.wikipedia.org/wiki/Musikalisches_W%C3%BCrfelspiel
 
 http://imslp.org/wiki/Musikalisches_W%C3%BCrfelspiel,_K.516f_%28Mozart,_Wolfgang_Amadeus%29
 
-# How to play
+## How to play
 
 ## Getting the files
 1. Clone or download this github directory. If manually downloaded, unzip the file.
@@ -24,10 +24,11 @@ http://imslp.org/wiki/Musikalisches_W%C3%BCrfelspiel,_K.516f_%28Mozart,_Wolfgang
 3. One laptop will be the CONDUCTOR, while all other laptops will be PLAYERS.
 4. CONDUCTOR laptop will open and runs the Mozart_CONDUCTOR.scd file. All other laptops run Mozart_PLAYER.scd file.
 5. Before running the piece, there is some simple configuration of IP addresses to be done -- see below.
+6. These instructions assume basic familiarity with SuperCollider (how to run things, etc). If you are not familiar with SuperCollider, look up "Gentle Introduction to SuperCollider"... ;-)
 
 ## IP addresses
 
-1. On each PLAYER laptop, the line with the `~destination` variable must be updated to reflect the IP address of the CONDUCTOR laptop. Usually you can find the local IP address of your computer by going to Network Preferences in your system. It should look more or less like this (number between double quotes is what you need to change):
+1. On each PLAYER laptop, the line with the `~destination` variable must be updated to reflect the IP address of the CONDUCTOR laptop. Usually you can find the local IP address of your computer by going to Network Preferences in your system. It should look more or less like this (number between double quotes is what you need to change; the number 57120 should not be changed):
 ```
 ~destination = NetAddr("192.168.42.69", 57120); // conductor IP address
 ```
@@ -36,10 +37,40 @@ http://imslp.org/wiki/Musikalisches_W%C3%BCrfelspiel,_K.516f_%28Mozart,_Wolfgang
 // ORCHESTRA PLAYERS IP ADDRESSES
 ~ips = [
 	NetAddr("192.168.1.101", 57120),  
-  NetAddr("192.168.1.102", 57120),
+  	NetAddr("192.168.1.102", 57120),
 	NetAddr("192.168.1.103", 57120),  
 ];
 ```
 Note: The IP address of each line should be the valid IP addresses of PLAYER laptops currently connected to the same local network. *If one of the PLAYER laptops included in this list is shut down, disconnected, or absent in a given rehearsal, you should comment out its line from the list. Otherwise SuperCollider might throw an error when you run the CONDUCTOR file.*
+
+## Run the code
+* CONDUCTOR laptop: in the Mozart_CONDUCTOR.scd file, simply evaluate, in order, the four lines that load everything (no other files need to be open). The CONDUCTOR Graphical User Interface will show up.
+```
+// Load IPs
+"Mozart_IP_Addresses.scd".loadRelative;
+
+// Load some variables
+"Mozart_Init_Variables.scd".loadRelative;
+
+// Load some functions
+"Mozart_Conductor_Functions.scd".loadRelative;
+
+// Load GUI
+"Mozart_Conductor_GUI.scd".loadRelative;
+```
+* PLAYER laptops: in the Mozart_PLAYER.scd file, simply evaluate the entire code block at once. The PLAYER Graphical User Interface (GUI) will show up.
+
+## Graphical Interfaces
+
+This is the PLAYER interface:
+![player](https://user-images.githubusercontent.com/4010596/27749992-cc0d6270-5d8a-11e7-8390-51f4e1bc390c.png)
+
+And this is the CONDUCTOR interface:
+![conductor](https://user-images.githubusercontent.com/4010596/27750032-e85242d4-5d8a-11e7-96d1-80486faaa7ee.png)
+
+## Playing instructions
+* CONDUCTOR should click on 
+
+
 
 
